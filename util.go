@@ -10,6 +10,14 @@ import (
 )
 
 
+func CopyFileIfNotExists(path, dest string) error {
+	if _, err := os.Stat(dest); os.IsNotExist(err) {
+		return CopyFile(path, dest)
+	}
+
+	return nil
+}
+
 func CopyFile(path, dest string) error {
 	in, err := os.Open(path)
 	if err != nil {
